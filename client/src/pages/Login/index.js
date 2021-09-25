@@ -3,7 +3,6 @@ import './styles.css';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
-import { Redirect } from 'react-router-dom';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -20,7 +19,7 @@ export default function LoginPage() {
       );
       if (user) {
         setAuth(user);
-        window.location = '/profile';
+        window.location = '/dashboard';
       }
     }
   };

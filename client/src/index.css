@@ -22,6 +22,8 @@ html {
 
 body {
   box-sizing: inherit;
+  background-color: var(--bg-color) !important;
+  color: var(--font-color) !important;
 }
 
 *,
