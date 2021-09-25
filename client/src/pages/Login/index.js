@@ -1,13 +1,28 @@
 import React, { useState } from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
+import { useAppState } from '../../contexts/AppStateContext';
+import useLocalStorage from '../../hooks/UseLocalStorage';
+import { Redirect } from 'react-router-dom';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { mode, authModes } = useAppState();
+  const [users] = useLocalStorage('users', []);
+  const [, setAuth] = useLocalStorage('auth', null);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (mode === authModes.LOCAL) {
+      const user = users.find(
+        (u) => u.email === email && u.password === password
+      );
+      if (user) {
+        setAuth(user);
+        window.location = '/profile';
+      }
+    }
   };
 
   return (
@@ -21,7 +36,7 @@ export default function LoginPage() {
       >
         <h1>Login</h1>
         <div className='form-group'>
-          <label>Email address</label>
+          <label>Email Address</label>
           <input
             type='email'
             name='email'
@@ -44,6 +59,7 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete='on'
           />
         </div>
         <button type='submit' className='btn btn-success mt-3'>

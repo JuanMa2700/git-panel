@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
+import { useAppState } from '../../contexts/AppStateContext';
+import useLocalStorage from '../../hooks/UseLocalStorage';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
   const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { mode, authModes } = useAppState();
+  const [users, setUsers] = useLocalStorage('users', []);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    if (mode === authModes.LOCAL) {
+      setUsers([...users, { name, lastname, email, password }]);
+      window.location = '/';
+    }
   };
 
   return (
@@ -45,7 +53,7 @@ export default function SignUpPage() {
           />
         </div>
         <div className='form-group'>
-          <label>Email address</label>
+          <label>Email Address</label>
           <input
             type='email'
             name='email'
@@ -65,6 +73,7 @@ export default function SignUpPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            autoComplete='on'
           />
         </div>
         <button type='submit' className='btn btn-success'>

@@ -1,29 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import AuthenticatedRoute from './AuthenticatedRoute';
-import LoginPage from '../pages/Login';
-import SignUpPage from '../pages/SignUp';
-import ProfilePage from '../pages/Profile';
-import RepositoriesPage from '../pages/Repositories';
+import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import ProtectedRoute from './ProtectedRoute';
+import SignUp from '../pages/SignUp';
+import Login from '../pages/Login';
+import Profile from '../pages/Profile';
+import Repositories from '../pages/Repositories';
 
-class AppRoutes extends Component {
-  render() {
-    return (
-      <div>
-        <Router>
-          <Switch>
-            <Route path='/' exact component={LoginPage} />
-            <Route path='/sign-up' component={SignUpPage} />
-            <AuthenticatedRoute path='/profile' component={ProfilePage} />
-            <AuthenticatedRoute
-              path='/repositories'
-              component={RepositoriesPage}
-            />
-          </Switch>
-        </Router>
-      </div>
-    );
-  }
+export default function AppRoutes() {
+  return (
+    <Router>
+      <Route path='/' exact component={Login} />
+      <Route path='/sign-up' component={SignUp} />
+      <ProtectedRoute path='/profile' component={Profile} />
+      <ProtectedRoute path='/repositories' component={Repositories} />
+    </Router>
+  );
 }
-
-export default AppRoutes;
