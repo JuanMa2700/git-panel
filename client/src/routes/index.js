@@ -8,7 +8,7 @@ import RepositoriesPage from '../pages/Repositories';
 class AppRoutes extends Component {
   render() {
     return (
-      <div className='TodoApp'>
+      <div>
         <Router>
           <Switch>
             <Route path='/' exact component={LoginPage} />
