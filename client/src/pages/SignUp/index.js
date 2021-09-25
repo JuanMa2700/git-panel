@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import './styles.css';
 import { Link } from 'react-router-dom';
 
-export default function LoginPage() {
+export default function SignUpPage() {
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -19,7 +21,29 @@ export default function LoginPage() {
         className='card p-5 col-md-4 col-sm-12'
         onSubmit={(e) => onSubmit(e)}
       >
-        <h1>Login</h1>
+        <h1>Sign Up</h1>
+        <div className='form-group'>
+          <label>Name</label>
+          <input
+            className='form-control'
+            type='text'
+            name='name'
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div className='form-group'>
+          <label>Last Name</label>
+          <input
+            className='form-control'
+            type='text'
+            name='lastname'
+            value={lastname}
+            onChange={(e) => setLastname(e.target.value)}
+            required
+          />
+        </div>
         <div className='form-group'>
           <label>Email address</label>
           <input
@@ -31,9 +55,6 @@ export default function LoginPage() {
             aria-describedby='emailHelp'
             required
           />
-          <small id='emailHelp' className='form-text text-muted'>
-            We'll never share your email with anyone else.
-          </small>
         </div>
         <div className='form-group'>
           <label>Password</label>
@@ -46,11 +67,11 @@ export default function LoginPage() {
             required
           />
         </div>
-        <button type='submit' className='btn btn-success mt-3'>
-          Login
-        </button>
-        <Link to='/sign-up' className='card-link mt-3 align-self-center'>
+        <button type='submit' className='btn btn-success'>
           Sign Up
+        </button>
+        <Link to='/' className='card-link mt-3 align-self-center'>
+          Login
         </Link>
       </form>
     </div>

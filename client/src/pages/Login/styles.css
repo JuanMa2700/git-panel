@@ -1,0 +1,73 @@
+.login {
+  background: linear-gradient(302deg, #000000, #ffffff, #000000, #000000);
+  background-size: 800% 800%;
+  width: 100vw;
+  height: 100vh;
+  -webkit-animation: AnimationName 18s ease infinite;
+  -moz-animation: AnimationName 18s ease infinite;
+  animation: AnimationName 18s ease infinite;
+}
+
+.card {
+  border-radius: 15px !important;
+  box-shadow: 5px 10px #888888;
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border: 1px solid rgba(0, 0, 0, 0.6) !important;
+  max-width: 500px;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 60%;
+  }
+  50% {
+    background-position: 100% 41%;
+  }
+  100% {
+    background-position: 0% 60%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 60%;
+  }
+  50% {
+    background-position: 100% 41%;
+  }
+  100% {
+    background-position: 0% 60%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 60%;
+  }
+  50% {
+    background-position: 100% 41%;
+  }
+  100% {
+    background-position: 0% 60%;
+  }
+}
+
+.card a {
+  color: #198754;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 1s;
+}
+
+.card a:hover {
+  color: #198754;
+  transform: scale(1.2);
+}
+
+label {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+button[type='submit'] {
+  font-size: 18px;
+  font-weight: 500;
+}

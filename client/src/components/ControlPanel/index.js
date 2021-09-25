@@ -14,7 +14,7 @@ export default function ControlPanelComponent() {
     themeModes,
   } = useAppState();
 
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
 
   return (
     <div className={`control-panel ${!show && 'hidden'}`}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import LoginPage from '../pages/Login';
+import SignUpPage from '../pages/SignUp';
 import ProfilePage from '../pages/Profile';
 import RepositoriesPage from '../pages/Repositories';
 
@@ -12,6 +13,7 @@ class AppRoutes extends Component {
         <Router>
           <Switch>
             <Route path='/' exact component={LoginPage} />
+            <Route path='/sign-up' component={SignUpPage} />
             <AuthenticatedRoute path='/profile' component={ProfilePage} />
             <AuthenticatedRoute
               path='/repositories'
