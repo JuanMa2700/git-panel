@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
+import { post } from '../../utils/Api';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
@@ -10,12 +11,20 @@ export default function SignUpPage() {
   const [password, setPassword] = useState('');
   const { mode, authModes } = useAppState();
   const [users, setUsers] = useLocalStorage('users', []);
+  const history = useHistory();
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
     if (mode === authModes.LOCAL) {
       setUsers([...users, { name, lastname, email, password }]);
-      window.location = '/';
+      history.push('/');
+    } else if (mode === authModes.API) {
+      const response = await post(
+        `${process.env.REACT_APP_AUTH_API_URL}/users`,
+        { name, lastname, email, password }
+      );
+      if (response.error) return;
+      history.push('/');
     }
   };
 

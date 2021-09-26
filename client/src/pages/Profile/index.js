@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { gql, useQuery } from '@apollo/client';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { localStorageKeys } from '../../utils/Consts';
@@ -20,7 +20,7 @@ export default function ProfilePage() {
   const { loading, error, data } = useQuery(GET_USER);
   const [authUser] = useLocalStorage(localStorageKeys.auth);
 
-  if (loading) return 'Loading...';
+  if (loading) return <div className='bg-animation'>Loading...</div>;
   if (error) return `Error! ${error.message}`;
 
   const { avatarUrl, bio, createdAt, login, name } = data.viewer;
@@ -37,7 +37,7 @@ export default function ProfilePage() {
         }}
       >
         <div className='profile-image'>
-          <img src={avatarUrl} />
+          <img alt='profile' src={avatarUrl} />
         </div>
         <div className='profile-login'>{login}</div>
         {name && <div className='profile-name'>{name}</div>}

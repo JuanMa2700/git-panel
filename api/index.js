@@ -1,11 +1,11 @@
-"use strict";
+'use strict';
 
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
 
 // Routes
-const routes = require("./Http/Routes");
+const routes = require('./Http/Routes');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.urlencoded({ extended: false }));
  */
 app.use(cors());
 app.use(helmet());
-app.use(helmet.hidePoweredBy({ setTo: "GPAPI" }));
+app.use(helmet.hidePoweredBy({ setTo: 'GPAPI' }));
 app.use(helmet.ieNoOpen());
 app.use(helmet.xssFilter());
 
@@ -31,7 +31,7 @@ app.use(routes);
  * Route not found handler.
  */
 app.use(function (req, res, next) {
-  const err = new Error("Content not Found");
+  const err = new Error('Content not Found');
   err.status = 404;
   err.errors = {
     url: [`Route ${req.originalUrl} not found`],
@@ -39,7 +39,7 @@ app.use(function (req, res, next) {
   next(err);
 });
 
-const { getMessage } = require("./resources/locales/utils");
+const { getMessage } = require('./resources/locales/utils');
 
 /**
  * Error handler.

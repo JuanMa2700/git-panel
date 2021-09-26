@@ -6,6 +6,12 @@ const Controller = "UserController";
 const { controller, request } = require("./Resolver");
 
 router.post(
+  `${PREFIX}`,
+  request("Users/CreateRequest"),
+  controller(Controller, "create")
+);
+
+router.post(
   `${PREFIX}/login`,
   request("Users/LoginRequest"),
   controller(Controller, "login")

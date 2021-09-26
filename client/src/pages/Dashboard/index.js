@@ -36,8 +36,11 @@ export default function DashboardPage(props) {
   return (
     <div className='container d-flex flex-row py-5'>
       <div
-        className='col-md-3 col-sm-12 overflow-auto'
-        style={{ maxHeight: 'calc(100vh - 180px)' }}
+        className='col-md-3 col-sm-12'
+        style={{
+          maxHeight: 'calc(100vh - 180px)',
+          overflowY: 'auto',
+        }}
       >
         <ProfileCard user={user} />
         {favorites.length > 0 && <FavoritesList {...{ favorites }} />}

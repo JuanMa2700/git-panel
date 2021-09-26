@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { localStorageKeys } from '../../utils/Consts';
+import { post } from '../../utils/Api';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -17,28 +18,16 @@ export default function LoginPage() {
     if (mode === authModes.LOCAL) {
       user = users.find((u) => u.email === email && u.password === password);
     } else if (mode === authModes.API) {
-      const response = await fetch(
+      const response = await post(
         `${process.env.REACT_APP_AUTH_API_URL}/users/login`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password,
-          }),
-        }
+        { email, password }
       );
-      if (response.ok) {
-        const data = await response.json();
-        user = data;
-      } else {
-        alert('Server response: ' + response.status);
-      }
+      if (response.error) return;
+      user = response;
     }
     if (user) {
       setAuth(user);
+      localStorage.removeItem(localStorageKeys.gitAuth);
       window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GIT_CLIENT_ID}`;
     }
   };
