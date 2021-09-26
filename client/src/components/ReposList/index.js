@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { gql, useQuery } from '@apollo/client';
 
 const GET_REPOS = gql`
-  query {
+  query repoQuery($after: String) {
     viewer {
-      repositories(first: 30, after: null) {
+      repositories(first: 3, after: $after) {
         totalCount
         pageInfo {
           endCursor
+          hasNextPage
         }
         nodes {
           id
@@ -24,7 +25,36 @@ const GET_REPOS = gql`
 `;
 
 export default function ReposList({ favorites, setFavorites }) {
-  const { loading, error, data } = useQuery(GET_REPOS);
+  const { loading, error, data, fetchMore } = useQuery(GET_REPOS, {
+    variables: { after: null },
+  });
+
+  const observer = useRef();
+  const lastRepoRef = useCallback(
+    (node) => {
+      if (loading || !data.viewer.repositories.pageInfo.hasNextPage) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting) {
+            fetchMore({
+              variables: { after: data.viewer.repositories.pageInfo.endCursor },
+              updateQuery: (prevResult, { fetchMoreResult }) => {
+                fetchMoreResult.viewer.repositories.nodes = [
+                  ...prevResult.viewer.repositories.nodes,
+                  ...fetchMoreResult.viewer.repositories.nodes,
+                ];
+                return fetchMoreResult;
+              },
+            });
+          }
+        },
+        { threshold: 1.0 }
+      );
+      if (node) observer.current.observe(node);
+    },
+    [loading, fetchMore, data]
+  );
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
@@ -36,10 +66,16 @@ export default function ReposList({ favorites, setFavorites }) {
       : setFavorites((prev) => [...prev, repository]);
   };
 
+  const repositories = data.viewer.repositories.nodes;
+
   return (
     <>
-      {data.viewer.repositories.nodes.map((repo, index) => (
-        <div className='repo-list-item my-4' key={index}>
+      {repositories.map((repo, index) => (
+        <div
+          className='repo-list-item my-4'
+          key={index}
+          ref={index === repositories.length - 1 ? lastRepoRef : null}
+        >
           <div className='d-flex flex-row justify-content-between'>
             <div className='repo-name'>{repo.name}</div>
             <div className='repo-owner'>Owned by: {repo.owner.login}</div>
