@@ -60,9 +60,9 @@ export default function ControlPanelComponent() {
           <input
             type='radio'
             name='auth'
-            value={authModes.DARK}
-            checked={mode === authModes.DARK}
-            onChange={() => setMode(authModes.DARK)}
+            value={authModes.API}
+            checked={mode === authModes.API}
+            onChange={() => setMode(authModes.API)}
           />
           <p>Api</p>
         </div>

@@ -11,16 +11,35 @@ export default function LoginPage() {
   const [users] = useLocalStorage(localStorageKeys.users, []);
   const [, setAuth] = useLocalStorage(localStorageKeys.auth, null);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    let user;
     if (mode === authModes.LOCAL) {
-      const user = users.find(
-        (u) => u.email === email && u.password === password
+      user = users.find((u) => u.email === email && u.password === password);
+    } else if (mode === authModes.API) {
+      const response = await fetch(
+        `${process.env.REACT_APP_AUTH_API_URL}/users/login`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: email,
+            password: password,
+          }),
+        }
       );
-      if (user) {
-        setAuth(user);
-        window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GIT_CLIENT_ID}`;
+      if (response.ok) {
+        const data = await response.json();
+        user = data;
+      } else {
+        alert('Server response: ' + response.status);
       }
+    }
+    if (user) {
+      setAuth(user);
+      window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GIT_CLIENT_ID}`;
     }
   };
 
