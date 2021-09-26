@@ -1,0 +1,6 @@
+{
+  "badRequest": "Hay algún problema con la solicitud, verifique que cumpla con los parámetros",
+  "resource.notfound": "No se encontraron resultados para la búsqueda",
+  "user.invalid_credentials": "Credenciales incorrectas",
+  "validation.errors": "Errores de validación"
+}
