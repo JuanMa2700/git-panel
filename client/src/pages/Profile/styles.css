@@ -1,0 +1,39 @@
+.profile-image {
+  max-height: 20vh;
+  align-self: center;
+  border-radius: 100%;
+  overflow: hidden;
+  border: 2px solid var(--primary);
+}
+.profile-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.profile-card {
+  font-size: 20px;
+  text-align: center;
+  color: black !important;
+}
+
+.profile-login {
+  margin: 15px 0 0;
+  font-weight: 600;
+}
+
+.profile-bio {
+  font-size: 16px;
+  margin: 10px 0 10px;
+  line-height: 22px;
+}
+
+.profile-created-date {
+  font-size: 14px;
+  margin: 5px 0 5px;
+}
+
+.profile-name {
+  font-size: 16px;
+  line-height: 10px;
+  margin-bottom: 5px;
+}

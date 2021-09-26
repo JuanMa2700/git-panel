@@ -1,0 +1,75 @@
+.control-panel {
+  width: 150px;
+  height: 200px;
+  background-color: var(--bg-color);
+  color: var(--font-color);
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: -2px 2px 9px -1px rgba(0, 0, 0, 0.75);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.control-panel.hidden {
+  width: 60px;
+  height: 60px;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.control-panel h4 {
+  text-align: center;
+  font-size: 18px !important;
+}
+
+.control-panel p {
+  min-width: 36px;
+  margin: 0 !important;
+}
+
+.control-panel div input[type='radio'] {
+  margin: 0 3px 0 2px;
+  align-self: center;
+}
+
+.control-panel div input[type='radio']:last-of-type {
+  margin: 0 5px 0 5px;
+}
+
+.control-panel .setup {
+  transition: opacity 1s width 0.2s height 0.2s;
+}
+
+.control-panel .setup.hidden {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.control-panel .icon-button.hidden {
+  width: 0;
+  height: 0;
+  opacity: 0;
+}
+
+.control-panel .icon-button {
+  width: 90%;
+  height: 90%;
+  transition: all 1s;
+}
+
+.control-panel .icon-button svg {
+  width: 100%;
+  height: 100%;
+}
+
+.control-panel .icon-button svg path {
+  stroke: var(--font-color);
+}

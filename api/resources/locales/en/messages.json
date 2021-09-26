@@ -1,0 +1,7 @@
+{
+  "badRequest": "There is something wrong with the request, verify that it meets the parameters",
+  "resource.notfound": "User not found",
+  "user.email_already_used": "The email is already in use",
+  "user.invalid_credentials": "Invalid credentials",
+  "validation.errors": "Validation errors"
+}
