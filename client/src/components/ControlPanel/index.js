@@ -47,7 +47,7 @@ export default function ControlPanelComponent() {
           />
           <p>Dark</p>
         </div>
-        <h4>Mode</h4>
+        <h4>Login Mode</h4>
         <div className='d-flex flex-row p-2'>
           <p>Local</p>
           <input

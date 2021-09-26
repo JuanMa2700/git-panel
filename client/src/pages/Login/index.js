@@ -39,7 +39,7 @@ export default function LoginPage() {
     >
       <form
         className='card p-5 col-md-4 col-sm-12'
-        style={{ maxWidth: '500px' }}
+        style={{ maxWidth: '500px', color: 'black' }}
         onSubmit={(e) => onSubmit(e)}
       >
         <h1>Login</h1>

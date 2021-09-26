@@ -36,6 +36,7 @@ export default function SignUpPage() {
       <form
         className='card p-5 col-md-4 col-sm-12'
         onSubmit={(e) => onSubmit(e)}
+        style={{ maxWidth: '500px', color: 'black' }}
       >
         <h1>Sign Up</h1>
         <div className='form-group'>

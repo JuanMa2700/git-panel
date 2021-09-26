@@ -6,13 +6,13 @@ const post = async (url, payload) => {
     },
     body: JSON.stringify(payload),
   }).catch((error) => {
-    alert(JSON.stringify(error));
+    alert(error);
     return { error: true, ...error };
   });
   if (response.ok) {
     return await response.json();
   } else {
-    alert(JSON.stringify(response));
+    alert(response.status);
     return { error: true, ...response };
   }
 };

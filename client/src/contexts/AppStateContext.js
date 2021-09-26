@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { THEME_MODES, AUTH_MODES, themes, appPrefix } from '../utils/Consts';
+import toggleTheme from '../utils/ToggleTheme';
 
 const AppStateContext = React.createContext();
 
@@ -12,12 +13,7 @@ export function AppStateProvider({ children }) {
   const [theme, setTheme] = useState(THEME_MODES.LIGHT);
 
   useEffect(() => {
-    const style = document.documentElement.style;
-    const current = themes[theme];
-    style.setProperty('--bg-color', current.bgColor);
-    style.setProperty('--font-color', current.fontColor);
-    style.setProperty('--primary', current.primary);
-    style.setProperty('--primary-contrast', current.primaryContrast);
+    toggleTheme(themes[theme]);
   }, [theme]);
 
   const data = {

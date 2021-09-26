@@ -48,7 +48,7 @@ export default function ProfilePage() {
         </div>
         <hr />
         <div style={{ fontSize: '15px' }}>
-          Loggin info for "My Git Repos!" <strong>{authUser.email}</strong>
+          Login info for "My Git Repos!" <strong>{authUser.email}</strong>
           <p>
             {authUser.name} {authUser.lastname}
           </p>
