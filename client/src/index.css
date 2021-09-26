@@ -184,3 +184,10 @@ button[type='submit'] {
 .star:hover {
   transform: scale(1.4);
 }
+
+.favorite-item {
+  border-bottom: 1px solid var(--font-color);
+  font-weight: 600;
+  padding: 8px 15px;
+  transition: all 1s;
+}

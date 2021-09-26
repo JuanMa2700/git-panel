@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ProfileCard from '../../components/ProfileCard';
 import ReposList from '../../components/ReposList';
+import FavoritesList from '../../components/FavoritesList';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import queryString from 'query-string';
 
@@ -33,9 +34,7 @@ export default function Dashboard(props) {
     <div className='container d-flex flex-row py-5'>
       <div className='col-md-3 col-sm-12'>
         <ProfileCard user={user} />
-        {favorites.map((item, index) => (
-          <div key={index}>{item.name}</div>
-        ))}
+        {favorites.length > 0 && <FavoritesList {...{ favorites }} />}
       </div>
       <div
         className='col-md-9 col-sm-12 px-5 overflow-auto'
@@ -44,9 +43,7 @@ export default function Dashboard(props) {
         }}
       >
         <h4 style={{ marginBottom: '20px' }}>Try my infinite scroll!</h4>
-        {gitAccessToken && (
-          <ReposList favorites={favorites} setFavorites={setFavorites} />
-        )}
+        {gitAccessToken && <ReposList {...{ favorites, setFavorites }} />}
       </div>
     </div>
   );

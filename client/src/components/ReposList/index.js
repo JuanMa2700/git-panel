@@ -39,7 +39,7 @@ export default function ReposList({ favorites, setFavorites }) {
   return (
     <>
       {data.viewer.repositories.nodes.map((repo, index) => (
-        <div className='repo-list-item my-4' key={index} href={`#${index}`}>
+        <div className='repo-list-item my-4' key={index}>
           <div className='d-flex flex-row justify-content-between'>
             <div className='repo-name'>{repo.name}</div>
             <div className='repo-owner'>Owned by: {repo.owner.login}</div>
