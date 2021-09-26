@@ -26,7 +26,10 @@ export const themes = {
 export const appPrefix = 'git-panel-';
 
 export const localStorageKeys = {
-  users: `${appPrefix}users`,
-  auth: `${appPrefix}auth`,
-  gitAuth: `${appPrefix}git-auth`,
+  prefixedUsers: `${appPrefix}users`,
+  prefixedAuth: `${appPrefix}auth`,
+  prefixedGitAuth: `${appPrefix}git-auth`,
+  users: 'users',
+  auth: 'auth',
+  gitAuth: 'git-auth',
 };

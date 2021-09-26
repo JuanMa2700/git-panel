@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
+import { localStorageKeys } from '../../utils/Consts';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { mode, authModes } = useAppState();
-  const [users] = useLocalStorage('users', []);
-  const [, setAuth] = useLocalStorage('auth', null);
+  const [users] = useLocalStorage(localStorageKeys.users, []);
+  const [, setAuth] = useLocalStorage(localStorageKeys.auth, null);
 
   const onSubmit = (e) => {
     e.preventDefault();

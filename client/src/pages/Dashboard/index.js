@@ -3,11 +3,14 @@ import ProfileCard from '../../components/ProfileCard';
 import ReposList from '../../components/ReposList';
 import FavoritesList from '../../components/FavoritesList';
 import useLocalStorage from '../../hooks/UseLocalStorage';
+import { localStorageKeys } from '../../utils/Consts';
 import queryString from 'query-string';
 
-export default function Dashboard(props) {
-  const [user] = useLocalStorage('auth');
-  const [gitAccessToken, setGitAccessToken] = useLocalStorage('git-auth');
+export default function DashboardPage(props) {
+  const [user] = useLocalStorage(localStorageKeys.auth);
+  const [gitAccessToken, setGitAccessToken] = useLocalStorage(
+    localStorageKeys.gitAuth
+  );
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -32,7 +35,10 @@ export default function Dashboard(props) {
 
   return (
     <div className='container d-flex flex-row py-5'>
-      <div className='col-md-3 col-sm-12'>
+      <div
+        className='col-md-3 col-sm-12 overflow-auto'
+        style={{ maxHeight: 'calc(100vh - 180px)' }}
+      >
         <ProfileCard user={user} />
         {favorites.length > 0 && <FavoritesList {...{ favorites }} />}
       </div>
