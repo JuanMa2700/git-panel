@@ -1,4 +1,6 @@
-const post = async (url, payload) => {
+import { toast } from 'react-toastify';
+
+export const post = async (url, payload) => {
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -6,17 +8,17 @@ const post = async (url, payload) => {
     },
     body: JSON.stringify(payload),
   }).catch((error) => {
-    alert(error);
     return { error: true, ...error };
   });
-  if (response.ok) {
-    return await response.json();
-  } else {
-    alert(response.status);
-    return { error: true, ...response };
+  if (response.error) {
+    toast('Server error', { type: 'error' });
+    return { error: true };
   }
-};
-
-module.exports = {
-  post,
+  const data = await response.json();
+  if (response.ok) {
+    return data;
+  } else {
+    toast(data.message || response.status, { type: 'error' });
+    return { error: true, data };
+  }
 };

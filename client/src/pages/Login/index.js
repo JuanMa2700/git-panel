@@ -4,6 +4,7 @@ import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { localStorageKeys } from '../../utils/Consts';
 import { post } from '../../utils/Api';
+import { toast } from 'react-toastify';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -16,7 +17,12 @@ export default function LoginPage() {
     e.preventDefault();
     let user;
     if (mode === authModes.LOCAL) {
-      user = users.find((u) => u.email === email && u.password === password);
+      user = users.find((u) => u.email === email);
+      if (!user) toast('User not found', { type: 'error' });
+      if (user && user.password !== password) {
+        toast('Invalid credentials', { type: 'error' });
+        return;
+      }
     } else if (mode === authModes.API) {
       const response = await post(
         `${process.env.REACT_APP_AUTH_API_URL}/users/login`,

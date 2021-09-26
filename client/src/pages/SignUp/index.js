@@ -3,6 +3,8 @@ import { Link, useHistory } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
 import { post } from '../../utils/Api';
+import { toast } from 'react-toastify';
+import { localStorageKeys } from '../../utils/Consts';
 
 export default function SignUpPage() {
   const [name, setName] = useState('');
@@ -10,13 +12,14 @@ export default function SignUpPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { mode, authModes } = useAppState();
-  const [users, setUsers] = useLocalStorage('users', []);
+  const [users, setUsers] = useLocalStorage(localStorageKeys.users, []);
   const history = useHistory();
 
   const onSubmit = async (e) => {
     e.preventDefault();
     if (mode === authModes.LOCAL) {
-      setUsers([...users, { name, lastname, email, password }]);
+      await setUsers([...users, { name, lastname, email, password }]);
+      toast('Signed up successfully!', { type: 'success' });
       history.push('/');
     } else if (mode === authModes.API) {
       const response = await post(
@@ -24,6 +27,7 @@ export default function SignUpPage() {
         { name, lastname, email, password }
       );
       if (response.error) return;
+      toast('Signed up successfully!', { type: 'success' });
       history.push('/');
     }
   };
