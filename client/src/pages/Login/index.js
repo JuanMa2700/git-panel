@@ -19,7 +19,7 @@ export default function LoginPage() {
       );
       if (user) {
         setAuth(user);
-        window.location = '/dashboard';
+        window.location = `https://github.com/login/oauth/authorize?client_id=${process.env.REACT_APP_GIT_CLIENT_ID}`;
       }
     }
   };

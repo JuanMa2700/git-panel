@@ -22,3 +22,11 @@ export const themes = {
     primaryContrast: '#C9D1D9',
   },
 };
+
+export const appPrefix = 'git-panel-';
+
+export const localStorageKeys = {
+  users: `${appPrefix}users`,
+  auth: `${appPrefix}auth`,
+  gitAuth: `${appPrefix}git-auth`,
+};

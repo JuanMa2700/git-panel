@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { THEME_MODES, AUTH_MODES, themes } from '../utils/Consts';
+import { THEME_MODES, AUTH_MODES, themes, appPrefix } from '../utils/Consts';
 
 const AppStateContext = React.createContext();
 
@@ -21,7 +21,7 @@ export function AppStateProvider({ children }) {
   }, [theme]);
 
   const data = {
-    prefix: 'git-panel-',
+    prefix: appPrefix,
     themeModes: THEME_MODES,
     authModes: AUTH_MODES,
     theme,
