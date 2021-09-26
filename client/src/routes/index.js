@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import useLocalStorage from '../hooks/UseLocalStorage';
+import Navbar from '../components/Navbar';
 import ProtectedRoute from './ProtectedRoute';
 import SignUp from '../pages/SignUp';
 import Login from '../pages/Login';
@@ -17,9 +18,12 @@ export default function AppRoutes() {
     );
   } else {
     return (
-      <Router>
-        <ProtectedRoute path='/' component={Dashboard} />
-      </Router>
+      <>
+        <Navbar />
+        <Router>
+          <ProtectedRoute path='/' component={Dashboard} />
+        </Router>
+      </>
     );
   }
 }

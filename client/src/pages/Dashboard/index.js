@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProfileCard from '../../components/ProfileCard';
 import ReposList from '../../components/ReposList';
 import useLocalStorage from '../../hooks/UseLocalStorage';
@@ -7,6 +7,7 @@ import queryString from 'query-string';
 export default function Dashboard(props) {
   const [user] = useLocalStorage('auth');
   const [gitAccessToken, setGitAccessToken] = useLocalStorage('git-auth');
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     async function getGitAccessToken() {
@@ -29,12 +30,23 @@ export default function Dashboard(props) {
   }, [props.location.search, setGitAccessToken, gitAccessToken]);
 
   return (
-    <div className='container d-flex flex-row p-5'>
-      <div className='col-md-4 col-sm-12'>
+    <div className='container d-flex flex-row py-5'>
+      <div className='col-md-3 col-sm-12'>
         <ProfileCard user={user} />
+        {favorites.map((item, index) => (
+          <div key={index}>{item.name}</div>
+        ))}
       </div>
-      <div className='col-md-8 col-sm-12'>
-        {gitAccessToken && <ReposList />}
+      <div
+        className='col-md-9 col-sm-12 px-5 overflow-auto'
+        style={{
+          maxHeight: 'calc(100vh - 180px)',
+        }}
+      >
+        <h4 style={{ marginBottom: '20px' }}>Try my infinite scroll!</h4>
+        {gitAccessToken && (
+          <ReposList favorites={favorites} setFavorites={setFavorites} />
+        )}
       </div>
     </div>
   );

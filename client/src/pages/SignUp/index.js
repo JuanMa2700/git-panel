@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './styles.css';
 import { Link } from 'react-router-dom';
 import { useAppState } from '../../contexts/AppStateContext';
 import useLocalStorage from '../../hooks/UseLocalStorage';
@@ -22,7 +21,7 @@ export default function SignUpPage() {
 
   return (
     <div
-      className='login d-flex flex-row
+      className='bg-animation d-flex flex-row
        justify-content-center align-items-center'
     >
       <form
